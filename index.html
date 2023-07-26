@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Resolution</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles -->
+    <style>
+        body {
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+        }
+        .result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 class="text-center">Super Resolution Image Processor</h1>
+    </header>
+    <div class="container">
+        <form id="upload-form" class="mt-5">
+            <div class="form-group">
+                <label for="image">Select image:</label>
+                <input type="file" id="image" name="image" accept="image/*" class="form-control-file" required>
+            </div>
+            <div class="form-group">
+                <label for="scale-factor">Scale factor:</label>
+                <input type="number" id="scale-factor" name="scale_factor" class="form-control" step="0.1" min="0.1" max="10" required>
+            </div>
+            <div class="form-group form-check">
+                <input type="checkbox" id="upscale" name="upscale" class="form-check-input">
+                <label for="upscale" class="form-check-label">Upscale the image?</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Process Image</button>
+        </form>
+        <div class="result mt-3">
+            <img id="output-image" src="" alt="Output image" />
+            <p id="output-psnr"></p>
+            <p id="output-ssim"></p>
+        </div>
+    </div>
+    <footer class="text-center">
+        <h4> By Brandon and Joeseph Setio </h4>
+        <small>Powered by SuperResolution API &copy; 2023</small>
+    </footer>
+
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    document.getElementById('upload-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        var formData = new FormData();
+        formData.append('image', document.getElementById('image').files[0]);
+        formData.append('scale_factor', document.getElementById('scale-factor').value);
+        formData.append('upscale', document.getElementById('upscale').checked);
+
+        fetch('https://brianbrand.pythonanywhere.com/myapp/process_image/', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.querySelector('.result').innerHTML = `<h5>Result:</h5> <pre>${JSON.stringify(data, null, 2)}</pre>`;
+        });
+    });
+    document.getElementById('output-image').src = data.super_resolved_image;
+    document.getElementById('output-psnr').innerText = 'PSNR: ' + data.psnr;
+    document.getElementById('output-ssim').innerText = 'SSIM: ' + data.ssim;
+    </script>
+</body>
+</html>
