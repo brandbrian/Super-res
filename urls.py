@@ -1,6 +1,6 @@
 # Superres/urls.py
 
-from django.urls import path
+from django.urls import include, path
 from .views import index, ImageProcessingView
 from django.conf import settings
 from django.conf.urls.static import static

@@ -3,7 +3,7 @@
 import os
 import matplotlib.pyplot as plt
 from django.urls import path
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.views import View
 from django.core.files.storage import default_storage
 from django.conf import settings
