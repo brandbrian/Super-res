@@ -62,7 +62,7 @@
         formData.append('scale_factor', document.getElementById('scale-factor').value);
         formData.append('upscale', document.getElementById('upscale').checked);
 
-        fetch('https://brianbrand.pythonanywhere.com/Super-res/process_image/', {
+        fetch('/Super-res/process_image/', {
             method: 'POST',
             body: formData
         })
