@@ -6,14 +6,12 @@ from django.urls import path
 from django.http import JsonResponse
 from django.views import View
 from django.core.files.storage import default_storage
-
+from django.conf import settings
 import cv2
 import pywt
 import numpy as np
 from skimage.metrics import peak_signal_noise_ratio, structural_similarity
-
 from django.shortcuts import render
-
 
 def index(request):
     return render(request, 'Superres/index.html')
@@ -30,8 +28,6 @@ def compare_images(original, super_resolved):
 
 # ... super_resolution function here ...
 # Super resolution function here...
-
-
 def super_resolution(img_path, scale_factor, upscale_superres=False):
     # Read the image
     image = cv2.imread(img_path)
