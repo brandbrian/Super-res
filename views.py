@@ -1,4 +1,4 @@
-# myapp/views.py
+# Superres/views.py
 
 import os
 import matplotlib.pyplot as plt

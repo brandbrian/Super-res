@@ -62,18 +62,18 @@
         formData.append('scale_factor', document.getElementById('scale-factor').value);
         formData.append('upscale', document.getElementById('upscale').checked);
 
-        fetch('https://brianbrand.pythonanywhere.com/myapp/process_image/', {
+        fetch('https://brianbrand.pythonanywhere.com/Super-res/process_image/', {
             method: 'POST',
             body: formData
         })
         .then(response => response.json())
         .then(data => {
             document.querySelector('.result').innerHTML = `<h5>Result:</h5> <pre>${JSON.stringify(data, null, 2)}</pre>`;
+            document.getElementById('output-image').src = data.super_resolved_image;
+            document.getElementById('output-psnr').innerText = 'PSNR: ' + data.psnr;
+            document.getElementById('output-ssim').innerText = 'SSIM: ' + data.ssim;
         });
     });
-    document.getElementById('output-image').src = data.super_resolved_image;
-    document.getElementById('output-psnr').innerText = 'PSNR: ' + data.psnr;
-    document.getElementById('output-ssim').innerText = 'SSIM: ' + data.ssim;
     </script>
 </body>
 </html>
