@@ -16,9 +16,9 @@ INSTALLED_APPS = [
 ]
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/home/brianbrand/Superres/Super-res/static'
+STATIC_ROOT = '/home/brianbrand/Superres/static'
 MEDIA_URL = '/media/'
-MEDIA_ROOT = '/home/brianbrand/Superres/Super-res/media'
+MEDIA_ROOT = '/home/brianbrand/Superres/media'
 
 
 # More settings...
