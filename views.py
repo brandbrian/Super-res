@@ -14,7 +14,7 @@ from skimage.metrics import peak_signal_noise_ratio, structural_similarity
 from django.shortcuts import render
 
 def index(request):
-    return render(request, 'Superres/index.html')
+    return render(request, 'my_app/index.html')
 
 def compare_images(original, super_resolved):
     original = original.astype(np.float64)
